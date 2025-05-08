@@ -8,7 +8,7 @@ import argparse
 # settings
 parser = argparse.ArgumentParser()
 parser.add_argument('--url', type=str, metavar='str',
-                    required=True)
+                    required=False, help="URL to process") # Made URL optional
 parser.add_argument('--use_original_name', action='store_true', default=True)
 
 args = parser.parse_args()
@@ -72,6 +72,9 @@ async def main(url: str):
 
 if __name__ == '__main__':
     url = args.url
+    if not url:
+        url = input("Please enter the URL: ")
+
     # hash url to folder name
     folder_name = get_folder_name(url)
     print("Folder name: ", folder_name)
